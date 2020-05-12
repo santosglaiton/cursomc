@@ -1,6 +1,11 @@
 package com.santosglaiton.cursomc.controller;
 
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
+import com.santosglaiton.cursomc.service.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,17 +16,15 @@ import java.util.List;
 @RequestMapping("/categorias")
 public class CategoriaController {
 
-    public List<CategoriaDomain> listar(){
+    @Autowired
+    private CategoriaService service;
 
-        CategoriaDomain categoriaDomain1 = new CategoriaDomain(1,"Informática");
-        CategoriaDomain categoriaDomain2 = new CategoriaDomain(2,"Escritório");
+    @GetMapping("/{id}")
+    public ResponseEntity<?> find(@PathVariable Integer id ){
 
-        List<CategoriaDomain> lista = new ArrayList<>();
+        CategoriaDomain obj = service.buscar(id);
 
-        lista.add(categoriaDomain1);
-        lista.add(categoriaDomain2);
-
-        return lista;
+        return ResponseEntity.ok().body(obj);
     }
 
 }
