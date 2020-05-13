@@ -2,6 +2,8 @@ package com.santosglaiton.cursomc.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +13,17 @@ public class CategoriaDomain implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+
+    @ManyToMany(mappedBy = "categorias")
+    private List<ProdutoDomain> produtos = new ArrayList<>();
+
+    public List<ProdutoDomain> getProdutos (){
+        return produtos;
+    }
+
+    public void setProdutos(List<ProdutoDomain> produtos){
+        this.produtos = produtos;
+    }
 
     public CategoriaDomain() {
     }
