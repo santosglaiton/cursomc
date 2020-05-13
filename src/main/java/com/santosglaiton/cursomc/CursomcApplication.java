@@ -1,8 +1,12 @@
 package com.santosglaiton.cursomc;
 
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
+import com.santosglaiton.cursomc.domain.CidadeDomain;
+import com.santosglaiton.cursomc.domain.EstadoDomain;
 import com.santosglaiton.cursomc.domain.ProdutoDomain;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
+import com.santosglaiton.cursomc.repositories.CidadeRepository;
+import com.santosglaiton.cursomc.repositories.EstadoRepository;
 import com.santosglaiton.cursomc.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,6 +23,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
+
+	@Autowired
+	private CidadeRepository cidadeRepository;
+
+	@Autowired
+	private EstadoRepository estadoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -42,7 +52,21 @@ public class CursomcApplication implements CommandLineRunner {
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
 
+		EstadoDomain est1 = new EstadoDomain(null, "Minas Gerais");
+		EstadoDomain est2 = new EstadoDomain(null, "São Paulo");
+
+		CidadeDomain c1 = new CidadeDomain(null, "Uberlandia", est1);
+		CidadeDomain c2 = new CidadeDomain(null, "São Paulo", est2);
+		CidadeDomain c3 = new CidadeDomain(null, "Campinas", est2);
+
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
 	}
 }
