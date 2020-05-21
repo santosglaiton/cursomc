@@ -1,13 +1,8 @@
 package com.santosglaiton.cursomc;
 
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
-import com.santosglaiton.cursomc.domain.CidadeDomain;
-import com.santosglaiton.cursomc.domain.EstadoDomain;
-import com.santosglaiton.cursomc.domain.ProdutoDomain;
-import com.santosglaiton.cursomc.repositories.CategoriaRepository;
-import com.santosglaiton.cursomc.repositories.CidadeRepository;
-import com.santosglaiton.cursomc.repositories.EstadoRepository;
-import com.santosglaiton.cursomc.repositories.ProdutoRepository;
+import com.santosglaiton.cursomc.domain.*;
+import com.santosglaiton.cursomc.domain.enums.TipoCliente;
+import com.santosglaiton.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +24,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private EstadoRepository estadoRepository;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -67,6 +68,18 @@ public class CursomcApplication implements CommandLineRunner {
 
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+		ClienteDomain cli1 = new ClienteDomain(null,"Maria Silva", "maria@gmail.com", "123456789", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("12345467", "122345567"));
+
+		EnderecoDomain e1 = new EnderecoDomain(null, "Rua Flores", "300", "Apto 303", "Jardim", "3821547", cli1, c1);
+
+		EnderecoDomain e2 = new EnderecoDomain(null, "Avenida Matos", "101", "Apto 100", "Centro", "789456123", cli1, c2 );
+
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
 	}
 }
