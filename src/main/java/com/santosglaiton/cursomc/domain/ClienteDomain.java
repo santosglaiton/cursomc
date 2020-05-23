@@ -26,6 +26,9 @@ public class ClienteDomain implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @OneToMany(mappedBy = "cliente")
+    private List<PedidoDomain> pedidos = new ArrayList<>();
+
     public ClienteDomain (){
     }
 
@@ -91,6 +94,14 @@ public class ClienteDomain implements Serializable {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    public List<PedidoDomain> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<PedidoDomain> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
