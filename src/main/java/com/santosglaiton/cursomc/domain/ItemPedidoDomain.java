@@ -1,5 +1,7 @@
 package com.santosglaiton.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.util.Objects;
 @Entity
 public class ItemPedidoDomain implements Serializable {
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPk id = new ItemPedidoPk();
 
@@ -26,6 +29,7 @@ public class ItemPedidoDomain implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public PedidoDomain getPedido(){
         return id.getPedido();
     }
