@@ -1,6 +1,5 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ public class ProdutoDomain implements Serializable {
     private String nomeProduto;
     private Double precoProduto;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "PRODUTO_CATEGORIA",
