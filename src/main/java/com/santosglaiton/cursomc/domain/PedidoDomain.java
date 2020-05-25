@@ -3,7 +3,9 @@ package com.santosglaiton.cursomc.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class PedidoDomain implements Serializable {
@@ -23,6 +25,9 @@ public class PedidoDomain implements Serializable {
     @ManyToOne
     @JoinColumn(name = "endereco_de_entrega_id")
     private EnderecoDomain enderecoDeEntrega;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedidoDomain> itens = new HashSet<>();
 
     public PedidoDomain() {
     }
@@ -72,6 +77,14 @@ public class PedidoDomain implements Serializable {
 
     public void setEnderecoDeEntrega(EnderecoDomain enderecoDeEntrega) {
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    public Set<ItemPedidoDomain> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedidoDomain> itens) {
+        this.itens = itens;
     }
 
     @Override
