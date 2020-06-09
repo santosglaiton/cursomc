@@ -17,9 +17,9 @@ public class PedidoController {
     private PedidoService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> find(@PathVariable Integer id ){
+    public ResponseEntity<PedidoDomain> find(@PathVariable Integer id ){
 
-        PedidoDomain obj = service.buscar(id);
+        PedidoDomain obj = service.find(id);
 
         return ResponseEntity.ok().body(obj);
     }

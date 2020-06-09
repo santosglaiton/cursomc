@@ -17,9 +17,9 @@ public class ClienteController {
     private ClienteService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> find(@PathVariable Integer id ){
+    public ResponseEntity<ClienteDomain> find(@PathVariable Integer id ){
 
-        ClienteDomain obj = service.buscar(id);
+        ClienteDomain obj = service.find(id);
 
         return ResponseEntity.ok().body(obj);
     }
