@@ -2,9 +2,11 @@ package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
+import com.santosglaiton.cursomc.service.exceptions.DataIntegrityException;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
 import org.hibernate.ObjectDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,6 +32,14 @@ public class CategoriaService {
     public CategoriaDomain update(CategoriaDomain obj){
         find(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete (Integer id) {
+        try {
+            repo.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
+        }
     }
 
 }
