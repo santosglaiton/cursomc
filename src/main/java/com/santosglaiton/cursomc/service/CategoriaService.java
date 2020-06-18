@@ -1,5 +1,6 @@
 package com.santosglaiton.cursomc.service;
 
+import com.santosglaiton.cursomc.DTO.CategoriaDTO;
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
 import com.santosglaiton.cursomc.service.exceptions.DataIntegrityException;
@@ -53,6 +54,10 @@ public class CategoriaService {
     public Page<CategoriaDomain> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public CategoriaDomain fromDto(CategoriaDTO objDto){
+        return new CategoriaDomain(objDto.getId(),objDto.getNome());
     }
 
 }
