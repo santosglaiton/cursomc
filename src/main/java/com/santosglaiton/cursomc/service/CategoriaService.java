@@ -35,7 +35,8 @@ public class CategoriaService {
     }
 
     public CategoriaDomain update(CategoriaDomain obj){
-        find(obj.getId());
+        CategoriaDomain newObj = find(obj.getId());
+        updateData(newObj, obj);
         return repo.save(obj);
     }
 
@@ -58,6 +59,10 @@ public class CategoriaService {
 
     public CategoriaDomain fromDto(CategoriaDTO objDto){
         return new CategoriaDomain(objDto.getId(),objDto.getNome());
+    }
+
+    private void updateData(CategoriaDomain newObj, CategoriaDomain obj){
+        newObj.setNome(obj.getNome());
     }
 
 }
