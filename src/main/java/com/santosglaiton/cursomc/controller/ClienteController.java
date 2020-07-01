@@ -2,6 +2,7 @@ package com.santosglaiton.cursomc.controller;
 
 import com.santosglaiton.cursomc.DTO.CategoriaDTO;
 import com.santosglaiton.cursomc.DTO.ClienteDTO;
+import com.santosglaiton.cursomc.DTO.ClienteNewDTO;
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
 import com.santosglaiton.cursomc.domain.ClienteDomain;
 import com.santosglaiton.cursomc.service.ClienteService;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,11 +32,20 @@ public class ClienteController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
+        ClienteDomain obj = service.fromDto(objDto);
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> update (@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id ){
         ClienteDomain obj = service.fromDto(objDto);
         obj.setId(id);
-        obj = service.update(obj);
+        service.update(obj);
         return ResponseEntity.noContent().build();
     }
 
