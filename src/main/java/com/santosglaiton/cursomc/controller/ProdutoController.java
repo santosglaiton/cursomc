@@ -1,12 +1,8 @@
 package com.santosglaiton.cursomc.controller;
 
-import com.santosglaiton.cursomc.DTO.CategoriaDTO;
 import com.santosglaiton.cursomc.DTO.ProdutoDTO;
 import com.santosglaiton.cursomc.controller.utils.URL;
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
-import com.santosglaiton.cursomc.domain.PedidoDomain;
 import com.santosglaiton.cursomc.domain.ProdutoDomain;
-import com.santosglaiton.cursomc.service.PedidoService;
 import com.santosglaiton.cursomc.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +42,6 @@ public class CategoriaController {
     public ResponseEntity<Void> update (@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id ){
         CategoriaDomain obj = service.fromDto(objDto);
         obj.setId(id);
-        obj = service.update(obj);
         return ResponseEntity.noContent().build();
     }
 
