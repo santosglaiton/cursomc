@@ -1,4 +1,4 @@
-package com.santosglaiton.cursomc.DTO;
+package com.santosglaiton.cursomc.dto;
 
 import com.santosglaiton.cursomc.service.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
@@ -41,6 +41,7 @@ public class ClienteNewDTO implements Serializable {
     private Integer cidadeId;
 
     public ClienteNewDTO() {
+        //Construtor vazio para instanciar a classe sem precisar passar argumentos
     }
 
     public String getNome() {

@@ -1,6 +1,6 @@
 package com.santosglaiton.cursomc.controller;
 
-import com.santosglaiton.cursomc.DTO.ProdutoDTO;
+import com.santosglaiton.cursomc.dto.ProdutoDTO;
 import com.santosglaiton.cursomc.controller.utils.URL;
 import com.santosglaiton.cursomc.domain.ProdutoDomain;
 import com.santosglaiton.cursomc.service.ProdutoService;

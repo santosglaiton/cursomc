@@ -1,11 +1,10 @@
 package com.santosglaiton.cursomc.service;
 
-import com.santosglaiton.cursomc.DTO.CategoriaDTO;
+import com.santosglaiton.cursomc.dto.CategoriaDTO;
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
 import com.santosglaiton.cursomc.service.exceptions.DataIntegrityException;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
-import org.hibernate.ObjectDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;

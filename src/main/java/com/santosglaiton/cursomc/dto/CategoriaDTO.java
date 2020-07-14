@@ -1,4 +1,4 @@
-package com.santosglaiton.cursomc.DTO;
+package com.santosglaiton.cursomc.dto;
 
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
 import org.hibernate.validator.constraints.Length;

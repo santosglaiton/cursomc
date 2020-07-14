@@ -1,7 +1,7 @@
 package com.santosglaiton.cursomc.controller;
 
-import com.santosglaiton.cursomc.DTO.ClienteDTO;
-import com.santosglaiton.cursomc.DTO.ClienteNewDTO;
+import com.santosglaiton.cursomc.dto.ClienteDTO;
+import com.santosglaiton.cursomc.dto.ClienteNewDTO;
 import com.santosglaiton.cursomc.domain.ClienteDomain;
 import com.santosglaiton.cursomc.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;

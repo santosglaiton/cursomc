@@ -1,4 +1,4 @@
-package com.santosglaiton.cursomc.DTO;
+package com.santosglaiton.cursomc.dto;
 
 import com.santosglaiton.cursomc.domain.ClienteDomain;
 import com.santosglaiton.cursomc.service.validation.ClienteUpdate;

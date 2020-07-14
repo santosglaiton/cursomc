@@ -1,12 +1,14 @@
 package com.santosglaiton.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoletoDomain extends PagamentoDomain {
 
     @JsonFormat(pattern = "dd/MM/yyyy")

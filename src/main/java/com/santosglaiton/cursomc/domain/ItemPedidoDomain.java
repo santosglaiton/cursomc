@@ -42,6 +42,14 @@ public class ItemPedidoDomain implements Serializable {
         return id.getProduto();
     }
 
+    public void setPedido(PedidoDomain pedido){
+        id.setPedido(pedido);
+    }
+
+    public void setProduto(ProdutoDomain produto){
+        id.setProduto(produto);
+    }
+
     public ItemPedidoPk getId() {
         return id;
     }

@@ -1,6 +1,6 @@
 package com.santosglaiton.cursomc.controller;
 
-import com.santosglaiton.cursomc.DTO.CategoriaDTO;
+import com.santosglaiton.cursomc.dto.CategoriaDTO;
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
 import com.santosglaiton.cursomc.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;

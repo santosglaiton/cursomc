@@ -1,10 +1,8 @@
 package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.domain.CategoriaDomain;
-import com.santosglaiton.cursomc.domain.PedidoDomain;
 import com.santosglaiton.cursomc.domain.ProdutoDomain;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
-import com.santosglaiton.cursomc.repositories.PedidoRepository;
 import com.santosglaiton.cursomc.repositories.ProdutoRepository;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

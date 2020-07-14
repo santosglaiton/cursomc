@@ -1,12 +1,9 @@
 package com.santosglaiton.cursomc.service.validation;
 
-import com.santosglaiton.cursomc.DTO.ClienteDTO;
-import com.santosglaiton.cursomc.DTO.ClienteNewDTO;
+import com.santosglaiton.cursomc.dto.ClienteDTO;
 import com.santosglaiton.cursomc.controller.exceptions.FieldMessage;
 import com.santosglaiton.cursomc.domain.ClienteDomain;
-import com.santosglaiton.cursomc.domain.enums.TipoCliente;
 import com.santosglaiton.cursomc.repositories.ClienteRepository;
-import com.santosglaiton.cursomc.service.validation.utils.BR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 

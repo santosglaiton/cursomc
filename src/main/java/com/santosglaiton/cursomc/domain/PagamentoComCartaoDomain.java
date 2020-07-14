@@ -1,10 +1,12 @@
 package com.santosglaiton.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartaoDomain extends PagamentoDomain{
 
     private Integer numeroDeParcelas;

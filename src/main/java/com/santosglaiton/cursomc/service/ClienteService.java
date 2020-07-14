@@ -1,9 +1,7 @@
 package com.santosglaiton.cursomc.service;
 
-import com.santosglaiton.cursomc.DTO.CategoriaDTO;
-import com.santosglaiton.cursomc.DTO.ClienteDTO;
-import com.santosglaiton.cursomc.DTO.ClienteNewDTO;
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
+import com.santosglaiton.cursomc.dto.ClienteDTO;
+import com.santosglaiton.cursomc.dto.ClienteNewDTO;
 import com.santosglaiton.cursomc.domain.CidadeDomain;
 import com.santosglaiton.cursomc.domain.ClienteDomain;
 import com.santosglaiton.cursomc.domain.EnderecoDomain;
@@ -21,7 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 

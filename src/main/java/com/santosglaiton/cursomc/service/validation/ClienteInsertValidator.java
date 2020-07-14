@@ -1,6 +1,6 @@
 package com.santosglaiton.cursomc.service.validation;
 
-import com.santosglaiton.cursomc.DTO.ClienteNewDTO;
+import com.santosglaiton.cursomc.dto.ClienteNewDTO;
 import com.santosglaiton.cursomc.controller.exceptions.FieldMessage;
 import com.santosglaiton.cursomc.domain.ClienteDomain;
 import com.santosglaiton.cursomc.domain.enums.TipoCliente;
