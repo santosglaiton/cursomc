@@ -2,7 +2,7 @@ package com.santosglaiton.cursomc.service.validation;
 
 import com.santosglaiton.cursomc.dto.ClienteNewDTO;
 import com.santosglaiton.cursomc.controller.exceptions.FieldMessage;
-import com.santosglaiton.cursomc.domain.ClienteDomain;
+import com.santosglaiton.cursomc.domain.Cliente;
 import com.santosglaiton.cursomc.domain.enums.TipoCliente;
 import com.santosglaiton.cursomc.repositories.ClienteRepository;
 import com.santosglaiton.cursomc.service.validation.utils.BR;
@@ -34,7 +34,7 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
         list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
     }
 
-        ClienteDomain aux = repo.findByEmail(objDto.getEmail());
+        Cliente aux = repo.findByEmail(objDto.getEmail());
 
     if(aux != null){
         list.add(new FieldMessage("email", "Email já existente"));

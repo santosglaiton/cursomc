@@ -1,8 +1,6 @@
 package com.santosglaiton.cursomc.controller;
 
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
-import com.santosglaiton.cursomc.domain.PedidoDomain;
-import com.santosglaiton.cursomc.dto.CategoriaDTO;
+import com.santosglaiton.cursomc.domain.Pedido;
 import com.santosglaiton.cursomc.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +18,15 @@ public class PedidoController {
     private PedidoService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<PedidoDomain> find(@PathVariable Integer id ){
+    public ResponseEntity<Pedido> find(@PathVariable Integer id ){
 
-        PedidoDomain obj = service.find(id);
+        Pedido obj = service.find(id);
 
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody PedidoDomain obj){
+    public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj){
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();

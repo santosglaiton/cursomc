@@ -1,7 +1,5 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class CategoriaDomain implements Serializable {
+public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,20 +15,20 @@ public class CategoriaDomain implements Serializable {
     private String nome;
 
     @ManyToMany(mappedBy = "categorias")
-    private List<ProdutoDomain> produtos = new ArrayList<>();
+    private List<Produto> produtos = new ArrayList<>();
 
-    public List<ProdutoDomain> getProdutos (){
+    public List<Produto> getProdutos (){
         return produtos;
     }
 
-    public void setProdutos(List<ProdutoDomain> produtos){
+    public void setProdutos(List<Produto> produtos){
         this.produtos = produtos;
     }
 
-    public CategoriaDomain() {
+    public Categoria() {
     }
 
-    public CategoriaDomain(Integer id, String nome) {
+    public Categoria(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -55,7 +53,7 @@ public class CategoriaDomain implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoriaDomain that = (CategoriaDomain) o;
+        Categoria that = (Categoria) o;
         return id.equals(that.id);
     }
 

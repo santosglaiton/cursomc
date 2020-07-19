@@ -2,7 +2,7 @@ package com.santosglaiton.cursomc.controller;
 
 import com.santosglaiton.cursomc.dto.ClienteDTO;
 import com.santosglaiton.cursomc.dto.ClienteNewDTO;
-import com.santosglaiton.cursomc.domain.ClienteDomain;
+import com.santosglaiton.cursomc.domain.Cliente;
 import com.santosglaiton.cursomc.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,16 +23,16 @@ public class ClienteController {
     private ClienteService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDomain> find(@PathVariable Integer id ){
+    public ResponseEntity<Cliente> find(@PathVariable Integer id ){
 
-        ClienteDomain obj = service.find(id);
+        Cliente obj = service.find(id);
 
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
-        ClienteDomain obj = service.fromDto(objDto);
+        Cliente obj = service.fromDto(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();
@@ -41,7 +41,7 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update (@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id ){
-        ClienteDomain obj = service.fromDto(objDto);
+        Cliente obj = service.fromDto(objDto);
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
@@ -55,7 +55,7 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll(){
-        List<ClienteDomain> list = service.findAll();
+        List<Cliente> list = service.findAll();
         List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
@@ -65,7 +65,7 @@ public class ClienteController {
                                                        @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
                                                        @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
                                                        @RequestParam(value = "direction", defaultValue = "ASC") String direction ){
-        Page<ClienteDomain> list = service.findPage(page, linesPerPage, orderBy, direction);
+        Page<Cliente> list = service.findPage(page, linesPerPage, orderBy, direction);
         Page<ClienteDTO> listDto = list.map(obj -> new ClienteDTO(obj));
         return ResponseEntity.ok().body(listDto);
     }

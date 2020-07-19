@@ -1,8 +1,8 @@
 package com.santosglaiton.cursomc.controller;
 
+import com.santosglaiton.cursomc.domain.Produto;
 import com.santosglaiton.cursomc.dto.ProdutoDTO;
 import com.santosglaiton.cursomc.controller.utils.URL;
-import com.santosglaiton.cursomc.domain.ProdutoDomain;
 import com.santosglaiton.cursomc.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,9 +19,9 @@ public class ProdutoController {
     private ProdutoService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoDomain> find(@PathVariable Integer id ){
+    public ResponseEntity<Produto> find(@PathVariable Integer id ){
 
-        ProdutoDomain obj = service.find(id);
+        Produto obj = service.find(id);
 
         return ResponseEntity.ok().body(obj);
     }
@@ -35,7 +35,7 @@ public class ProdutoController {
                                                      @RequestParam(value = "direction", defaultValue = "ASC") String direction ){
         String nomeDecoded = URL.decodeParam(nome);
         List<Integer> ids= URL.decodeIntList(categorias);
-        Page<ProdutoDomain> list = service.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
+        Page<Produto> list = service.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
         Page<ProdutoDTO> listDto = list.map(obj -> new ProdutoDTO(obj));
         return ResponseEntity.ok().body(listDto);
     }

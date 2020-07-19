@@ -1,6 +1,6 @@
 package com.santosglaiton.cursomc.dto;
 
-import com.santosglaiton.cursomc.domain.ClienteDomain;
+import com.santosglaiton.cursomc.domain.Cliente;
 import com.santosglaiton.cursomc.service.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Length;
 
@@ -24,7 +24,7 @@ public class ClienteDTO implements Serializable {
     public ClienteDTO(){
     }
 
-    public ClienteDTO(ClienteDomain obj){
+    public ClienteDTO(Cliente obj){
         id = obj.getId();
         nome = obj.getNome();
         email = obj.getEmail();

@@ -2,7 +2,7 @@ package com.santosglaiton.cursomc.service.validation;
 
 import com.santosglaiton.cursomc.dto.ClienteDTO;
 import com.santosglaiton.cursomc.controller.exceptions.FieldMessage;
-import com.santosglaiton.cursomc.domain.ClienteDomain;
+import com.santosglaiton.cursomc.domain.Cliente;
 import com.santosglaiton.cursomc.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
@@ -34,7 +34,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 
         List<FieldMessage> list = new ArrayList<>();
 
-        ClienteDomain aux = repo.findByEmail(objDto.getEmail());
+        Cliente aux = repo.findByEmail(objDto.getEmail());
 
     if(aux != null && !aux.getId().equals(uriId)){
         list.add(new FieldMessage("email", "Email já existente"));

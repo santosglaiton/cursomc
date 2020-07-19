@@ -1,6 +1,5 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
@@ -12,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public abstract class PagamentoDomain implements Serializable {
+public abstract class Pagamento implements Serializable {
 
     @Id
     private Integer id;
@@ -22,13 +21,13 @@ public abstract class PagamentoDomain implements Serializable {
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
-    private PedidoDomain pedido;
+    private Pedido pedido;
 
-    public PagamentoDomain(){
+    public Pagamento(){
 
     }
 
-    public PagamentoDomain(Integer id, EstadoPagamento estado, PedidoDomain pedido) {
+    public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
         this.id = id;
         this.estado = (estado == null) ? null : estado.getCod();
         this.pedido = pedido;
@@ -50,11 +49,11 @@ public abstract class PagamentoDomain implements Serializable {
         this.estado = estado.getCod();
     }
 
-    public PedidoDomain getPedido() {
+    public Pedido getPedido() {
         return pedido;
     }
 
-    public void setPedido(PedidoDomain pedido) {
+    public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
 
@@ -62,7 +61,7 @@ public abstract class PagamentoDomain implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PagamentoDomain that = (PagamentoDomain) o;
+        Pagamento that = (Pagamento) o;
         return id.equals(that.id);
     }
 

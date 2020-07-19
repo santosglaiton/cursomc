@@ -1,7 +1,7 @@
 package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.dto.CategoriaDTO;
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
+import com.santosglaiton.cursomc.domain.Categoria;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
 import com.santosglaiton.cursomc.service.exceptions.DataIntegrityException;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
@@ -21,20 +21,20 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository repo;
 
-    public CategoriaDomain find(Integer id){
+    public Categoria find(Integer id){
 
-        Optional<CategoriaDomain> obj = repo.findById(id);
+        Optional<Categoria> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id:" + id + ", Tipo: " + CategoriaDomain.class.getName()));
+                "Objeto não encontrado! Id:" + id + ", Tipo: " + Categoria.class.getName()));
     }
 
-    public CategoriaDomain insert(CategoriaDomain obj){
+    public Categoria insert(Categoria obj){
         obj.setId(null);
         return repo.save(obj);
     }
 
-    public CategoriaDomain update(CategoriaDomain obj){
-        CategoriaDomain newObj = find(obj.getId());
+    public Categoria update(Categoria obj){
+        Categoria newObj = find(obj.getId());
         updateData(newObj, obj);
         return repo.save(obj);
     }
@@ -47,20 +47,20 @@ public class CategoriaService {
         }
     }
 
-    public List<CategoriaDomain> findAll(){
+    public List<Categoria> findAll(){
         return repo.findAll();
     }
 
-    public Page<CategoriaDomain> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
     }
 
-    public CategoriaDomain fromDto(CategoriaDTO objDto){
-        return new CategoriaDomain(objDto.getId(),objDto.getNome());
+    public Categoria fromDto(CategoriaDTO objDto){
+        return new Categoria(objDto.getId(),objDto.getNome());
     }
 
-    private void updateData(CategoriaDomain newObj, CategoriaDomain obj){
+    private void updateData(Categoria newObj, Categoria obj){
         newObj.setNome(obj.getNome());
     }
 

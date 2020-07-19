@@ -1,7 +1,7 @@
 package com.santosglaiton.cursomc.controller;
 
 import com.santosglaiton.cursomc.dto.CategoriaDTO;
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
+import com.santosglaiton.cursomc.domain.Categoria;
 import com.santosglaiton.cursomc.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,16 +22,16 @@ public class CategoriaController {
     private CategoriaService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDomain> find(@PathVariable Integer id ){
+    public ResponseEntity<Categoria> find(@PathVariable Integer id ){
 
-        CategoriaDomain obj = service.find(id);
+        Categoria obj = service.find(id);
 
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto){
-        CategoriaDomain obj = service.fromDto(objDto);
+        Categoria obj = service.fromDto(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();
@@ -40,7 +40,7 @@ public class CategoriaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update (@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id ){
-        CategoriaDomain obj = service.fromDto(objDto);
+        Categoria obj = service.fromDto(objDto);
         obj.setId(id);
         return ResponseEntity.noContent().build();
     }
@@ -53,7 +53,7 @@ public class CategoriaController {
 
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> findAll(){
-        List<CategoriaDomain> list = service.findAll();
+        List<Categoria> list = service.findAll();
         List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
@@ -63,7 +63,7 @@ public class CategoriaController {
                                                         @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
                                                         @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
                                                         @RequestParam(value = "direction", defaultValue = "ASC") String direction ){
-        Page<CategoriaDomain> list = service.findPage(page, linesPerPage, orderBy, direction);
+        Page<Categoria> list = service.findPage(page, linesPerPage, orderBy, direction);
         Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
         return ResponseEntity.ok().body(listDto);
     }

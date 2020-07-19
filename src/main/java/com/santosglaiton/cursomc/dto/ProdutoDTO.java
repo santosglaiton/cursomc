@@ -1,6 +1,6 @@
 package com.santosglaiton.cursomc.dto;
 
-import com.santosglaiton.cursomc.domain.ProdutoDomain;
+import com.santosglaiton.cursomc.domain.Produto;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ public class ProdutoDTO implements Serializable {
     public ProdutoDTO(){
     }
 
-    public ProdutoDTO(ProdutoDomain obj){
+    public ProdutoDTO(Produto obj){
         id = obj.getIdProduto();
         nome = obj.getNome();
         preco = obj.getPrecoProduto();

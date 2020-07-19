@@ -1,30 +1,31 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class CidadeDomain implements Serializable {
+public class Estado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private EstadoDomain estado;
+    @JsonIgnore
+    @OneToMany(mappedBy = "estado")
+    private List<Cidade> cidades = new ArrayList<>();
 
-    public CidadeDomain() {
+    public Estado() {
     }
 
-    public CidadeDomain(Integer id, String nome, EstadoDomain estado) {
+    public Estado(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.estado = estado;
     }
 
     public Integer getId() {
@@ -43,19 +44,19 @@ public class CidadeDomain implements Serializable {
         this.nome = nome;
     }
 
-    public EstadoDomain getEstado() {
-        return estado;
+    public List<Cidade> getCidades() {
+        return cidades;
     }
 
-    public void setEstado(EstadoDomain estado) {
-        this.estado = estado;
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CidadeDomain that = (CidadeDomain) o;
+        Estado that = (Estado) o;
         return id.equals(that.id);
     }
 

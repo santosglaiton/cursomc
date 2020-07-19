@@ -1,7 +1,7 @@
 package com.santosglaiton.cursomc.service;
 
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
-import com.santosglaiton.cursomc.domain.ProdutoDomain;
+import com.santosglaiton.cursomc.domain.Categoria;
+import com.santosglaiton.cursomc.domain.Produto;
 import com.santosglaiton.cursomc.repositories.CategoriaRepository;
 import com.santosglaiton.cursomc.repositories.ProdutoRepository;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
@@ -23,17 +23,17 @@ public class ProdutoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public ProdutoDomain find(Integer id){
+    public Produto find(Integer id){
 
-        Optional<ProdutoDomain> obj = repo.findById(id);
+        Optional<Produto> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id:" + id + ", Tipo: " + ProdutoDomain.class.getName()));
+                "Objeto não encontrado! Id:" + id + ", Tipo: " + Produto.class.getName()));
     }
 
-    public Page<ProdutoDomain> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
+    public Page<Produto> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
 
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        List<CategoriaDomain> categorias = categoriaRepository.findAllById(ids);
+        List<Categoria> categorias = categoriaRepository.findAllById(ids);
         return repo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
     }
 

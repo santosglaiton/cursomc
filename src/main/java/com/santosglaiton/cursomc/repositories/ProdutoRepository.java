@@ -1,7 +1,7 @@
 package com.santosglaiton.cursomc.repositories;
 
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
-import com.santosglaiton.cursomc.domain.ProdutoDomain;
+import com.santosglaiton.cursomc.domain.Categoria;
+import com.santosglaiton.cursomc.domain.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<ProdutoDomain, Integer> {
+public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
     @Transactional(readOnly = true)
-    @Query("SELECT DISTINCT obj FROM ProdutoDomain obj INNER JOIN obj.categorias cat WHERE obj.nome LIKE %:nome% AND cat IN :categorias")
-    Page<ProdutoDomain> findDistinctByNomeContainingAndCategoriasIn(@Param("nome") String nome, @Param("categorias") List<CategoriaDomain> categorias, Pageable pageRequest);
+    @Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.nome LIKE %:nome% AND cat IN :categorias")
+    Page<Produto> findDistinctByNomeContainingAndCategoriasIn(@Param("nome") String nome, @Param("categorias") List<Categoria> categorias, Pageable pageRequest);
 }

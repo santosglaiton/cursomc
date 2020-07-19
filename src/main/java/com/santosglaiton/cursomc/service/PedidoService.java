@@ -1,14 +1,12 @@
 package com.santosglaiton.cursomc.service;
 
-import com.santosglaiton.cursomc.domain.ItemPedidoDomain;
-import com.santosglaiton.cursomc.domain.PagamentoComBoletoDomain;
-import com.santosglaiton.cursomc.domain.PagamentoDomain;
-import com.santosglaiton.cursomc.domain.PedidoDomain;
+import com.santosglaiton.cursomc.domain.ItemPedido;
+import com.santosglaiton.cursomc.domain.PagamentoComBoleto;
+import com.santosglaiton.cursomc.domain.Pedido;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
 import com.santosglaiton.cursomc.repositories.ItemPedidoRepository;
 import com.santosglaiton.cursomc.repositories.PagamentoRepository;
 import com.santosglaiton.cursomc.repositories.PedidoRepository;
-import com.santosglaiton.cursomc.repositories.ProdutoRepository;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,26 +33,26 @@ public class PedidoService {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
-    public PedidoDomain find(Integer id){
+    public Pedido find(Integer id){
 
-        Optional<PedidoDomain> obj = repo.findById(id);
+        Optional<Pedido> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id:" + id + ", Tipo: " + PedidoDomain.class.getName()));
+                "Objeto não encontrado! Id:" + id + ", Tipo: " + Pedido.class.getName()));
     }
 
     @Transactional
-    public PedidoDomain insert(PedidoDomain obj) {
+    public Pedido insert(Pedido obj) {
         obj.setId(null);
         obj.setInstante(new Date());
         obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
         obj.getPagamento().setPedido(obj);
-        if (obj.getPagamento() instanceof PagamentoComBoletoDomain) {
-            PagamentoComBoletoDomain pagto = (PagamentoComBoletoDomain) obj.getPagamento();
+        if (obj.getPagamento() instanceof PagamentoComBoleto) {
+            PagamentoComBoleto pagto = (PagamentoComBoleto) obj.getPagamento();
             boletoService.preencherPagamentoComBoleto(pagto, obj.getInstante());
         }
         obj = repo.save(obj);
         pagamentoRepository.save(obj.getPagamento());
-        for (ItemPedidoDomain ip : obj.getItens()) {
+        for (ItemPedido ip : obj.getItens()) {
             ip.setDesconto(0.0);
             ip.setProduto(produtoService.find(ip.getProduto().getIdProduto()));
             ip.setPreco(ip.getProduto().getPrecoProduto());

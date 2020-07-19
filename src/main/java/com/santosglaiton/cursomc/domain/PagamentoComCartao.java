@@ -7,14 +7,14 @@ import javax.persistence.Entity;
 
 @Entity
 @JsonTypeName("pagamentoComCartao")
-public class PagamentoComCartaoDomain extends PagamentoDomain{
+public class PagamentoComCartao extends Pagamento {
 
     private Integer numeroDeParcelas;
 
-    public PagamentoComCartaoDomain(){
+    public PagamentoComCartao(){
     }
 
-    public PagamentoComCartaoDomain(Integer id, EstadoPagamento estado, PedidoDomain pedido, Integer numeroDeParcelas){
+    public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas){
         super(id, estado, pedido);
         this.numeroDeParcelas = numeroDeParcelas;
     }

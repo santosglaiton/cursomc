@@ -2,9 +2,9 @@ package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.dto.ClienteDTO;
 import com.santosglaiton.cursomc.dto.ClienteNewDTO;
-import com.santosglaiton.cursomc.domain.CidadeDomain;
-import com.santosglaiton.cursomc.domain.ClienteDomain;
-import com.santosglaiton.cursomc.domain.EnderecoDomain;
+import com.santosglaiton.cursomc.domain.Cidade;
+import com.santosglaiton.cursomc.domain.Cliente;
+import com.santosglaiton.cursomc.domain.Endereco;
 import com.santosglaiton.cursomc.domain.enums.TipoCliente;
 import com.santosglaiton.cursomc.repositories.CidadeRepository;
 import com.santosglaiton.cursomc.repositories.ClienteRepository;
@@ -34,23 +34,23 @@ public class ClienteService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    public ClienteDomain find(Integer id){
+    public Cliente find(Integer id){
 
-        Optional<ClienteDomain> obj = repo.findById(id);
+        Optional<Cliente> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id:" + id + ", Tipo: " + ClienteDomain.class.getName()));
+                "Objeto não encontrado! Id:" + id + ", Tipo: " + Cliente.class.getName()));
     }
 
     @Transactional
-    public ClienteDomain insert(ClienteDomain obj){
+    public Cliente insert(Cliente obj){
         obj.setId(null);
         obj = repo.save(obj);
         enderecoRepository.saveAll(obj.getEnderecos());
         return obj;
     }
 
-    public ClienteDomain update(ClienteDomain obj){
-        ClienteDomain newObj = find(obj.getId());
+    public Cliente update(Cliente obj){
+        Cliente newObj = find(obj.getId());
         updateData(newObj, obj);
         return repo.save(newObj);
     }
@@ -63,23 +63,23 @@ public class ClienteService {
         }
     }
 
-    public List<ClienteDomain> findAll(){
+    public List<Cliente> findAll(){
         return repo.findAll();
     }
 
-    public Page<ClienteDomain> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+    public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
     }
 
-    public ClienteDomain fromDto(ClienteDTO objDto){
-        return new ClienteDomain(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+    public Cliente fromDto(ClienteDTO objDto){
+        return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
     }
 
-    public ClienteDomain fromDto(ClienteNewDTO objDto){
-        ClienteDomain cli = new ClienteDomain(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));
-        CidadeDomain cid = cidadeRepository.getOne(objDto.getCidadeId());
-        EnderecoDomain end = new EnderecoDomain(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
+    public Cliente fromDto(ClienteNewDTO objDto){
+        Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));
+        Cidade cid = cidadeRepository.getOne(objDto.getCidadeId());
+        Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
         cli.getEnderecos().add(end);
         cli.getTelefones().add(objDto.getTelefone1());
         if(objDto.getTelefone2()!= null){
@@ -91,7 +91,7 @@ public class ClienteService {
         return cli;
     }
 
-    private void updateData(ClienteDomain newObj, ClienteDomain obj){
+    private void updateData(Cliente newObj, Cliente obj){
         newObj.setNome(obj.getNome());
         newObj.setEmail(obj.getEmail());
     }

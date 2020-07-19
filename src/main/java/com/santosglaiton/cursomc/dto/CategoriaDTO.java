@@ -1,6 +1,6 @@
 package com.santosglaiton.cursomc.dto;
 
-import com.santosglaiton.cursomc.domain.CategoriaDomain;
+import com.santosglaiton.cursomc.domain.Categoria;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -17,7 +17,7 @@ public class CategoriaDTO implements Serializable {
     public CategoriaDTO(){
     }
 
-    public CategoriaDTO(CategoriaDomain obj){
+    public CategoriaDTO(Categoria obj){
         id = obj.getId();
         nome = obj.getNome();
     }

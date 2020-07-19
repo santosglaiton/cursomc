@@ -1,6 +1,5 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -8,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class EnderecoDomain implements Serializable {
+public class Endereco implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +21,16 @@ public class EnderecoDomain implements Serializable {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private ClienteDomain cliente;
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "cidade_id")
-    private CidadeDomain cidade;
+    private Cidade cidade;
 
-    public EnderecoDomain (){
+    public Endereco(){
     }
 
-    public EnderecoDomain(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, ClienteDomain cliente, CidadeDomain cidade) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -90,19 +89,19 @@ public class EnderecoDomain implements Serializable {
         this.cep = cep;
     }
 
-    public ClienteDomain getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteDomain cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public CidadeDomain getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(CidadeDomain cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 
@@ -110,7 +109,7 @@ public class EnderecoDomain implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EnderecoDomain that = (EnderecoDomain) o;
+        Endereco that = (Endereco) o;
         return id.equals(that.id);
     }
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class ProdutoDomain implements Serializable {
+public class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +22,13 @@ public class ProdutoDomain implements Serializable {
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
-    private List<CategoriaDomain> categorias = new ArrayList<>();
+    private List<Categoria> categorias = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
-    private Set<ItemPedidoDomain> itens = new HashSet<>();
+    private Set<ItemPedido> itens = new HashSet<>();
 
-    public ProdutoDomain() {
+    public Produto() {
     }
 
     public Integer getIdProduto() {
@@ -39,16 +39,16 @@ public class ProdutoDomain implements Serializable {
         this.idProduto = idProduto;
     }
 
-    public ProdutoDomain(Integer idProduto, String nome, Double precoProduto) {
+    public Produto(Integer idProduto, String nome, Double precoProduto) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.precoProduto = precoProduto;
     }
 
     @JsonIgnore
-    public List<PedidoDomain> getPedidos(){
-        List<PedidoDomain> lista = new ArrayList<>();
-        for (ItemPedidoDomain x : itens){
+    public List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
+        for (ItemPedido x : itens){
             lista.add(x.getPedido());
         }
         return lista;
@@ -70,19 +70,19 @@ public class ProdutoDomain implements Serializable {
         this.precoProduto = precoProduto;
     }
 
-    public List<CategoriaDomain> getCategorias() {
+    public List<Categoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<CategoriaDomain> categorias) {
+    public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
     }
 
-    public Set<ItemPedidoDomain> getItens() {
+    public Set<ItemPedido> getItens() {
         return itens;
     }
 
-    public void setItens(Set<ItemPedidoDomain> itens) {
+    public void setItens(Set<ItemPedido> itens) {
         this.itens = itens;
     }
 
@@ -90,7 +90,7 @@ public class ProdutoDomain implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProdutoDomain that = (ProdutoDomain) o;
+        Produto that = (Produto) o;
         return idProduto.equals(that.idProduto);
     }
 

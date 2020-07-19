@@ -1,14 +1,14 @@
 package com.santosglaiton.cursomc.repositories;
 
-import com.santosglaiton.cursomc.domain.ClienteDomain;
+import com.santosglaiton.cursomc.domain.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<ClienteDomain, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Transactional(readOnly = true)
-    ClienteDomain findByEmail(String email);
+    Cliente findByEmail(String email);
 
 }

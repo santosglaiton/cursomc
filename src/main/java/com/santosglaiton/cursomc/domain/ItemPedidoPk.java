@@ -1,7 +1,5 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.santosglaiton.cursomc.repositories.ProdutoRepository;
-
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,25 +11,25 @@ public class ItemPedidoPk implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
-    private PedidoDomain pedido;
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
-    private ProdutoDomain produto;
+    private Produto produto;
 
-    public PedidoDomain getPedido() {
+    public Pedido getPedido() {
         return pedido;
     }
 
-    public void setPedido(PedidoDomain pedido) {
+    public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
 
-    public ProdutoDomain getProduto() {
+    public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(ProdutoDomain produto) {
+    public void setProduto(Produto produto) {
         this.produto = produto;
     }
 
