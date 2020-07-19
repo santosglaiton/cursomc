@@ -1,27 +1,25 @@
-package com.santosglaiton.cursomc.config;
+package com.nelioalves.cursomc.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.santosglaiton.cursomc.domain.PagamentoComBoleto;
-import com.santosglaiton.cursomc.domain.PagamentoComCartao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nelioalves.cursomc.domain.PagamentoComBoleto;
+import com.nelioalves.cursomc.domain.PagamentoComCartao;
+
 @Configuration
 public class JacksonConfig {
-
-    //classe criada para registrar as sublasses de pagamento
-
-    @Bean
-    public Jackson2ObjectMapperBuilder objectMapperBuilder(){
-        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder(){
-            public void configure(ObjectMapper objectMapper){
-                objectMapper.registerSubtypes(PagamentoComCartao.class);
-                objectMapper.registerSubtypes(PagamentoComBoleto.class);
-                super.configure(objectMapper);
-            }
-        };
-        return builder;
-    }
-
+	// https://stackoverflow.com/questions/41452598/overcome-can-not-construct-instance-ofinterfaceclass-without-hinting-the-pare
+	@Bean
+	public Jackson2ObjectMapperBuilder objectMapperBuilder() {
+		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder() {
+			public void configure(ObjectMapper objectMapper) {
+				objectMapper.registerSubtypes(PagamentoComCartao.class);
+				objectMapper.registerSubtypes(PagamentoComBoleto.class);
+				super.configure(objectMapper);
+			}
+		};
+		return builder;
+	}
 }

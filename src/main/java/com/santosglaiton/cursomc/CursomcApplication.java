@@ -1,4 +1,4 @@
-package com.santosglaiton.cursomc;
+package com.nelioalves.cursomc;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +12,6 @@ public class CursomcApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
-	}
+	public void run(String... args) throws Exception {		
+	}	
 }
