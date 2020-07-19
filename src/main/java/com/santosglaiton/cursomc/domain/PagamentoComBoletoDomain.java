@@ -20,7 +20,7 @@ public class PagamentoComBoletoDomain extends PagamentoDomain {
     public PagamentoComBoletoDomain(){
     }
 
-    public PagamentoComBoletoDomain(Integer id, EstadoPagamento estado, PedidoDomain pedido, Date dataVencimento, Date dataPagamento){
+    public PagamentoComBoletoDomain(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento){
         super(id, estado, pedido);
         this.dataPagamento = dataPagamento;
         this.dataVencimento = dataVencimento;

@@ -14,7 +14,7 @@ public class PagamentoComCartaoDomain extends PagamentoDomain{
     public PagamentoComCartaoDomain(){
     }
 
-    public PagamentoComCartaoDomain(Integer id, EstadoPagamento estado, PedidoDomain pedido, Integer numeroDeParcelas){
+    public PagamentoComCartaoDomain(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas){
         super(id, estado, pedido);
         this.numeroDeParcelas = numeroDeParcelas;
     }

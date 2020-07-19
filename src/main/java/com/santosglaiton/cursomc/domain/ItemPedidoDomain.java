@@ -21,7 +21,7 @@ public class ItemPedidoDomain implements Serializable {
     public ItemPedidoDomain (){
     }
 
-    public ItemPedidoDomain(PedidoDomain pedido, ProdutoDomain produto, Double desconto, Integer quantidade, Double preco) {
+    public ItemPedidoDomain(Pedido pedido, ProdutoDomain produto, Double desconto, Integer quantidade, Double preco) {
         id.setPedido(pedido);
         id.setProduto(produto);
         this.desconto = desconto;
@@ -34,7 +34,7 @@ public class ItemPedidoDomain implements Serializable {
     }
 
     @JsonIgnore
-    public PedidoDomain getPedido(){
+    public Pedido getPedido(){
         return id.getPedido();
     }
 
@@ -42,7 +42,7 @@ public class ItemPedidoDomain implements Serializable {
         return id.getProduto();
     }
 
-    public void setPedido(PedidoDomain pedido){
+    public void setPedido(Pedido pedido){
         id.setPedido(pedido);
     }
 
@@ -93,5 +93,19 @@ public class ItemPedidoDomain implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(getProduto().getNome());
+        builder.append(", Qte: ");
+        builder.append(getQuantidade());
+        builder.append(", Preço unitário");
+        builder.append(getPreco());
+        builder.append(", Subtotal: ");
+        builder.append(getSubtotal());
+        builder.append("\n");
+        return builder.toString();
     }
 }

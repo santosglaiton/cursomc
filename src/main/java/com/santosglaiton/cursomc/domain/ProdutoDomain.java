@@ -46,8 +46,8 @@ public class ProdutoDomain implements Serializable {
     }
 
     @JsonIgnore
-    public List<PedidoDomain> getPedidos(){
-        List<PedidoDomain> lista = new ArrayList<>();
+    public List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
         for (ItemPedidoDomain x : itens){
             lista.add(x.getPedido());
         }

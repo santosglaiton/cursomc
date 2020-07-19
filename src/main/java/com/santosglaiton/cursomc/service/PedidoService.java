@@ -2,13 +2,11 @@ package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.domain.ItemPedidoDomain;
 import com.santosglaiton.cursomc.domain.PagamentoComBoletoDomain;
-import com.santosglaiton.cursomc.domain.PagamentoDomain;
-import com.santosglaiton.cursomc.domain.PedidoDomain;
+import com.santosglaiton.cursomc.domain.Pedido;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
 import com.santosglaiton.cursomc.repositories.ItemPedidoRepository;
 import com.santosglaiton.cursomc.repositories.PagamentoRepository;
 import com.santosglaiton.cursomc.repositories.PedidoRepository;
-import com.santosglaiton.cursomc.repositories.ProdutoRepository;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,15 +33,15 @@ public class PedidoService {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
-    public PedidoDomain find(Integer id){
+    public Pedido find(Integer id){
 
-        Optional<PedidoDomain> obj = repo.findById(id);
+        Optional<Pedido> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id:" + id + ", Tipo: " + PedidoDomain.class.getName()));
+                "Objeto não encontrado! Id:" + id + ", Tipo: " + Pedido.class.getName()));
     }
 
     @Transactional
-    public PedidoDomain insert(PedidoDomain obj) {
+    public Pedido insert(Pedido obj) {
         obj.setId(null);
         obj.setInstante(new Date());
         obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
@@ -61,6 +59,7 @@ public class PedidoService {
             ip.setPedido(obj);
         }
         itemPedidoRepository.saveAll(obj.getItens());
+        System.out.println(obj);
         return obj;
     }
 

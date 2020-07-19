@@ -1,12 +1,9 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.santosglaiton.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.*;
@@ -35,7 +32,7 @@ public class ClienteDomain implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
-    private List<PedidoDomain> pedidos = new ArrayList<>();
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public ClienteDomain (){
     }
@@ -104,11 +101,11 @@ public class ClienteDomain implements Serializable {
         this.telefones = telefones;
     }
 
-    public List<PedidoDomain> getPedidos() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(List<PedidoDomain> pedidos) {
+    public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 

@@ -1,6 +1,5 @@
 package com.santosglaiton.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
@@ -22,13 +21,13 @@ public abstract class PagamentoDomain implements Serializable {
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
-    private PedidoDomain pedido;
+    private Pedido pedido;
 
     public PagamentoDomain(){
 
     }
 
-    public PagamentoDomain(Integer id, EstadoPagamento estado, PedidoDomain pedido) {
+    public PagamentoDomain(Integer id, EstadoPagamento estado, Pedido pedido) {
         this.id = id;
         this.estado = (estado == null) ? null : estado.getCod();
         this.pedido = pedido;
@@ -50,11 +49,11 @@ public abstract class PagamentoDomain implements Serializable {
         this.estado = estado.getCod();
     }
 
-    public PedidoDomain getPedido() {
+    public Pedido getPedido() {
         return pedido;
     }
 
-    public void setPedido(PedidoDomain pedido) {
+    public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
 
