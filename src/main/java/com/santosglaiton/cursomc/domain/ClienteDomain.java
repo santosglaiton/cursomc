@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.santosglaiton.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,9 +17,11 @@ public class ClienteDomain implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Size(min = 4, max = 150)
     private String nome;
 
     @Column(unique = true)
+    @Size(min = 15, max = 150)
     private String email;
     private String cpfOuCnpj;
     private Integer tipo;
