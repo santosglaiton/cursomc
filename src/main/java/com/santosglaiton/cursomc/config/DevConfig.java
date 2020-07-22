@@ -1,6 +1,8 @@
 package com.santosglaiton.cursomc.config;
 
 import com.santosglaiton.cursomc.service.DBService;
+import com.santosglaiton.cursomc.service.EmailService;
+import com.santosglaiton.cursomc.service.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -30,5 +32,6 @@ public class DevConfig {
 
         return true;
     }
+
 
 }

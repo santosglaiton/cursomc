@@ -3,6 +3,7 @@ package com.santosglaiton.cursomc.config;
 import com.santosglaiton.cursomc.service.DBService;
 import com.santosglaiton.cursomc.service.EmailService;
 import com.santosglaiton.cursomc.service.MockEmailService;
+import com.santosglaiton.cursomc.service.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +26,15 @@ public class TestConfig {
         return true;
     }
 
+//    @Bean
+//    public EmailService emailService(){
+//        return new MockEmailService();
+//    }
+
     @Bean
     public EmailService emailService(){
-        return new MockEmailService();
+        return new SmtpEmailService();
     }
+
 
 }
