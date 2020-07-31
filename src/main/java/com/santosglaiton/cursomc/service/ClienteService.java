@@ -1,5 +1,6 @@
 package com.santosglaiton.cursomc.service;
 
+import com.santosglaiton.cursomc.domain.enums.Perfil;
 import com.santosglaiton.cursomc.dto.ClienteDTO;
 import com.santosglaiton.cursomc.dto.ClienteNewDTO;
 import com.santosglaiton.cursomc.domain.Cidade;
@@ -9,6 +10,8 @@ import com.santosglaiton.cursomc.domain.enums.TipoCliente;
 import com.santosglaiton.cursomc.repositories.CidadeRepository;
 import com.santosglaiton.cursomc.repositories.ClienteRepository;
 import com.santosglaiton.cursomc.repositories.EnderecoRepository;
+import com.santosglaiton.cursomc.security.UserSS;
+import com.santosglaiton.cursomc.service.exceptions.AuthorizationException;
 import com.santosglaiton.cursomc.service.exceptions.DataIntegrityException;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,10 @@ public class ClienteService {
 
     public Cliente find(Integer id){
 
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+            throw new AuthorizationException("Acesso negado");
+        }
         Optional<Cliente> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id:" + id + ", Tipo: " + Cliente.class.getName()));
