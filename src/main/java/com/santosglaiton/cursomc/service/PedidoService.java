@@ -1,14 +1,17 @@
 package com.santosglaiton.cursomc.service;
 
-import com.santosglaiton.cursomc.domain.ItemPedido;
-import com.santosglaiton.cursomc.domain.PagamentoComBoleto;
-import com.santosglaiton.cursomc.domain.Pedido;
+import com.santosglaiton.cursomc.domain.*;
 import com.santosglaiton.cursomc.domain.enums.EstadoPagamento;
 import com.santosglaiton.cursomc.repositories.ItemPedidoRepository;
 import com.santosglaiton.cursomc.repositories.PagamentoRepository;
 import com.santosglaiton.cursomc.repositories.PedidoRepository;
+import com.santosglaiton.cursomc.security.UserSS;
+import com.santosglaiton.cursomc.service.exceptions.AuthorizationException;
 import com.santosglaiton.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,4 +72,15 @@ public class PedidoService {
         emailService.sendOrderConfirmationEmail(obj);
         return obj;
     }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+        UserSS user = UserService.authenticated();
+        if(user == null){
+            throw new AuthorizationException("Acesso negado");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente = clienteService.find(user.getId());
+        return repo.findByCliente(cliente, pageRequest);
+    }
+
 }
