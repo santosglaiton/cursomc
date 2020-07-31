@@ -6,6 +6,7 @@ import com.santosglaiton.cursomc.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -29,7 +30,7 @@ public class CategoriaController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")@PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto){
         Categoria obj = service.fromDto(objDto);
         obj = service.insert(obj);
@@ -38,14 +39,14 @@ public class CategoriaController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")@PutMapping("/{id}")
     public ResponseEntity<Void> update (@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id ){
         Categoria obj = service.fromDto(objDto);
         obj.setId(id);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")@DeleteMapping("/{id}")
     public ResponseEntity<Void> delete ( @PathVariable Integer id ){
         service.delete(id);
         return ResponseEntity.noContent().build();
