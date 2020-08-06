@@ -2,6 +2,7 @@ package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.service.exceptions.FileException;
 import org.apache.commons.io.FilenameUtils;
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,4 +50,19 @@ public class ImageService {
         }
         return new ByteArrayInputStream(os.toByteArray());
     }
+
+    public BufferedImage cropSquare(BufferedImage img){
+        int min = (img.getHeight() <= img.getWidth()) ? img.getHeight() : img.getWidth();
+        return Scalr.crop(
+                img,
+                (img.getWidth()/2) - (min/2),
+                (img.getHeight()/2) - (min/2),
+                min,
+                min);
+    }
+
+    public BufferedImage resize(BufferedImage img,  int size){
+        return Scalr.resize(img, Scalr.Method.ULTRA_QUALITY, size);
+    }
+
 }
