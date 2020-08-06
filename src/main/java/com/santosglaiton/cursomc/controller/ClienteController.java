@@ -77,4 +77,11 @@ public class ClienteController {
         URI uri = service.uploadProfilePicture(file);
         return ResponseEntity.created(uri).build();
     }
+
+    @GetMapping("/email")
+    public ResponseEntity<Cliente> find(@RequestParam(value = "value") String email){
+        Cliente obj = service.findByEmail(email);
+        return ResponseEntity.ok().body(obj);
+    }
+
 }
