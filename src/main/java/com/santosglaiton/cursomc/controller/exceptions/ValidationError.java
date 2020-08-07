@@ -16,7 +16,7 @@ public class ValidationError extends StandardError {
         errors.add(new FieldMessage(fieldName, message));
     }
 
-    public ValidationError(Integer status, String message, Long timeStamp) {
-        super(status, message, timeStamp);
+    public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
+        super(timestamp, status, error, message, path);
     }
 }
