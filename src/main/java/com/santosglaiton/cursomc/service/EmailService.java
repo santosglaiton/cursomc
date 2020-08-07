@@ -2,7 +2,9 @@ package com.santosglaiton.cursomc.service;
 
 import com.santosglaiton.cursomc.domain.Cliente;
 import com.santosglaiton.cursomc.domain.Pedido;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
+
 public interface EmailService {
 
     void sendOrderConfirmationEmail(Pedido obj);
